@@ -1,0 +1,57 @@
+name: Share household rules
+description: Paste 5+ household YNAB rules. Say how you talk to YNAB. No token. No export.
+title: "Rules: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is a mailbox. It does not install anything.
+
+        You do **not** need an MCP. Official API + a rules file is enough.
+
+        After you submit, I'll reply on the issue with your lines rewritten as pass/fail checks. Filing does not connect YNAB to your assistant.
+
+        **A rule** is something your house fights about (when a deposit is income, when a card gets paid, when a placeholder is real).
+
+        **Not a rule:** “Give every dollar a job.” “Cover overspending.” “Reconcile sometimes.”
+
+        Do **not** paste a Personal Access Token, budget export, account numbers, or people’s names.
+  - type: textarea
+    id: rules
+    attributes:
+      label: Your household rules
+      description: At least five. One sentence per line. Specific enough that someone could mark this month pass or fail.
+      placeholder: |
+        - Don’t treat expected money as cash. Book income when it lands.
+        - Don’t pay the card from a reimbursement category until the expense report is filed.
+        - If a subscription can bill a gift card, check the merchant before you clear the placeholder.
+    validations:
+      required: true
+  - type: dropdown
+    id: client
+    attributes:
+      label: How do you talk to YNAB today?
+      description: MCP = a Model Context Protocol server that exposes YNAB as tools. Skip that option if you only use the official API or a script.
+      options:
+        - Official API + a rules file (Claude, Cursor, or a script — no MCP)
+        - A YNAB MCP (write the name in the next box)
+        - An assistant, but YNAB is not connected yet
+        - None of these
+    validations:
+      required: true
+  - type: input
+    id: client_detail
+    attributes:
+      label: Name the MCP or script (if you have one)
+      description: Fill this in if you picked “A YNAB MCP,” or if you want to name your script. Otherwise leave blank.
+      placeholder: e.g. oliverames/ynab-mcp-server or ynab_report.py + markdown
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Optional. Short notes only. Still no tokens, exports, or account numbers.
+    validations:
+      required: false
